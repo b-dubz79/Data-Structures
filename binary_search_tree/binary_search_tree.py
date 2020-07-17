@@ -9,6 +9,10 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from collections import deque
+
+# from queue.py import Queue
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -76,17 +80,46 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if self is None:
+            return
+        if self.left is not None:
+            self.left.in_order_print(node)
+        print(self.value)
+        if self.right is not None:
+            self.right.in_order_print(node)
+        
+        
+        
+       
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        items = []
+        items.append(self)
+        while len(items) > 0:
+            current = items.pop(0)
+            print(current.value)
+            if current.left is not None:
+                items.append(current.left)
+            if current.right is not None:
+                items.append(current.right)
+        
+            
+            
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        items = []
+        items.append(self)
+        while len(items) > 0:
+            current = items.pop()
+            print(current.value)
+            if current.left is not None:
+                items.append(current.left)
+            if current.right is not None:
+                items.append(current.right)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -98,3 +131,24 @@ class BSTNode:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+bst = BSTNode(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
+bst.in_order_print(5)
+bst.bft_print(1)
+    
+    #  items = Queue()
+    #     items.enqueue(self.value)
+    #     while self.size > 0:
+    #         print(self.value)
+    #         if self.left is not None:
+    #             items.enqueue(self.left.value)
+    #         if self.right is not None:
+    #             items.enqueue(self.right.value)
+    #         items.dequeue()
